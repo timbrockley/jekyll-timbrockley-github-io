@@ -1,0 +1,11 @@
+{%- if include.delimiter -%}
+  {%- assign delimiter = include.delimiter -%}
+{%- else -%}
+  headerbar{%- assign delimiter = '' -%}
+{%- endif -%}
+
+{%- for collection in site.collections -%}
+{%- if site[collection.label].size > 0 -%}
+    <a href="/collections#{{collection.label}}">{{collection.label}}</a>{{delimiter}}
+{%- endif -%}
+{%- endfor -%}

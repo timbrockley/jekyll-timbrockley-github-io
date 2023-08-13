@@ -1,0 +1,13 @@
+{%- if include.delimiter -%}
+  {%- assign delimiter = include.delimiter -%}
+{%- else -%}
+  {%- assign delimiter = '' -%}
+{%- endif -%}
+
+{%- for post in site.posts -%}
+  {%- assign year = post.date | date: "%Y" -%}
+  {%- if year != last_year -%}
+    <a href="/archive#{{year}}">{{year}}</a>{{delimiter}}
+    {%- assign last_year = year -%}
+  {%- endif -%}
+{%- endfor -%}

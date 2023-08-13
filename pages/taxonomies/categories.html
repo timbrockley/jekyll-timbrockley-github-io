@@ -1,0 +1,51 @@
+---
+layout: default
+title: Categories
+robots: "index, follow, noarchive, noodp, noydi"
+description: "Posts grouped by category."
+canonical: /
+permalink: /categories
+---
+<div id="content">
+
+  <h2>Categories</h2>
+
+  <div style="margin: 20px;">
+
+    <!-- display posts not in a category -->
+    <ul>
+    {%- assign site_posts = site.posts | sort: 'title' -%}
+    {%- for post in site_posts -%}
+      {%- if post.categories.size == 0 -%}
+        <li>
+          <a href="{{post.url}}">{{post.title}}</a>
+          &nbsp;
+          <span style="color:#555;font-size: smaller;">{{post.date | date: '%d %b %Y'}}&nbsp;</span>
+        </li>
+      {%- endif -%}
+    {%- endfor -%}
+    </ul>
+    <!-- display posts not in a category -->
+
+    <!-- display posts by category -->
+    {%- assign site_categories = site.categories | sort -%}
+    {%- for category in site_categories -%}
+      {%- capture category_name -%}{{ category | first }}{%- endcapture -%}
+      <a id="{{category_name}}"></a>
+      <h3>{{category_name}}</h3>
+      <ul>
+      {%- assign posts = site.categories[category_name] | sort: 'title' -%}
+      {%- for post in posts -%}
+        <li>
+          <a href="{{post.url}}">{{post.title}}</a>
+          &nbsp;
+          <span style="color:#555;font-size: smaller;">{{post.date | date: '%d %b %Y'}}&nbsp;</span>
+        </li>
+      {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+    <!-- display posts by category -->
+
+  </div>
+
+</div>

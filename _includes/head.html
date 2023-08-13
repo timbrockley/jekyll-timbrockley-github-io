@@ -1,0 +1,434 @@
+<!-- HEAD -->
+
+<!-- initialise values -->
+
+{%- assign BLANK = '' -%}
+
+{%- assign title = '' -%}
+{%- assign page_title = '' | append: page.title | strip -%}
+{%- assign site_title = '' | append: site.title | strip -%}
+
+{%- assign description = '' -%}
+{%- assign page_description = '' | append: page.description | strip -%}
+{%- assign site_description = '' | append: site.description | strip -%}
+
+{%- assign keywords = '' -%}
+{%- assign page_keywords = '' | append: page.keywords | strip -%}
+{%- assign site_keywords = '' | append: site.keywords | strip -%}
+
+{%- assign robots = '' -%}
+{%- assign page_robots = '' | append: page.robots | strip -%}
+{%- assign site_robots = '' | append: site.robots | strip -%}
+
+{%- assign canonical = '' -%}
+{%- assign page_canonical = '' | append: page.canonical | strip -%}
+{%- assign site_canonical = '' | append: site.canonical | strip -%}
+
+<!-- check if homepage -->
+{%- if page.layout == 'home' -%}
+
+  <!-- homepage -->
+
+  <!-- url_title & url_category -->
+  {%- assign url_title = '/' -%}
+  {%- assign url_category = '' -%}
+  <!-- url_title & url_category -->
+
+  <!-- override site title with front matter title -->
+  {%- if page.title.size > 0 -%}
+    {%- assign site_title = '' | append: page.title | strip -%}
+  {%- endif -%}
+  <!-- override site title with front matter title -->
+
+  <!-- override site description with front matter description -->
+  {%- if page.description.size > 0 -%}
+    {%- assign site_description = '' | append: page.description | strip -%}
+  {%- endif -%}
+  <!-- override site description with front matter description -->
+
+  <!-- override site keywords with front matter keywords -->
+  {%- if page.keywords.size > 0 -%}
+    {%- assign site_keywords = '' | append: page.keywords | strip -%}
+  {%- endif -%}
+  <!-- override site keywords with front matter keywords -->
+
+  <!-- title -->
+  {%- if site_title.size > 0 -%}
+    {%- assign title = '' | append: site_title | strip -%}
+  {%- endif -%}
+  <!-- title -->
+
+  <!-- site_description -->
+  {%- if site_description.size > 0 -%}
+    {%- assign description = '' | append: site_description | strip -%}
+  {%- endif -%}
+  <!-- site_description -->
+
+  <!-- keywords -->
+  {%- if site_keywords.size > 0 -%}
+    {%- assign keywords = '' | append: site_keywords | strip -%}
+  {%- endif -%}
+  <!-- keywords -->
+
+  <!-- homepage -->
+
+{%- else -%}
+
+  <!-- not homepage -->
+
+  <!-- url_title -->
+  {%- assign url_title = '' -%}
+  {%- assign url_title_parts = page.url | split: '/' -%}
+  {%- if url_title_parts.size > 0 -%}
+    {%- assign url_title_index = url_title_parts.size | minus: 1 -%}
+    {%- assign url_title = url_title_parts[url_title_index] | strip -%}
+    {%- assign url_title = url_title | replace: ' ','-' -%}
+  {%- endif -%}
+  <!-- url_title -->
+
+  <!-- url_category -->
+  {%- assign url_category = '' -%}
+  {%- if page.categories[0].size > 0 -%}
+    {%- assign url_category = page.categories[0] -%}
+    {%- assign url_category = url_category | replace: ' ','-' -%}
+  {%- endif -%}
+  <!-- url_category -->
+
+  <!-- page_title -->
+  {%- if page_title.size > 0 -%}
+    {%- assign title = '' | append: page_title | strip -%}
+    {%- if page.categories[0].size > 0 or site_title.size > 0 -%}
+      {%- assign title = title | append: ' - ' -%}
+    {%- endif -%}
+  {%- endif -%}
+  <!-- page_title -->
+
+  <!-- page_category -->
+  {%- assign page_category = '' -%}
+  {%- if page.categories[0].size > 0 -%}
+    {%- assign words = page.categories[0] | split: ' ' -%}
+    {%- capture page_category -%}{% for word in words -%}{{ word | capitalize }}{{' '}}{%- endfor -%}{%- endcapture -%}
+    {%- assign title = title | append: page_category | strip -%}
+    {%- if site_title.size > 0 -%}
+      {%- assign title = title | append: ' - ' -%}
+    {%- endif -%}
+  {%- endif -%}
+  <!-- page_category -->
+
+  <!-- title -->
+  {%- if site_title.size > 0 -%}
+    {%- assign title = title | append: site_title | strip -%}
+  {%- endif -%}
+  <!-- title -->
+
+  <!-- page_description -->
+  {%- if page_description.size > 0 -%}
+    {%- assign description = '' | append: page_description | strip -%}
+  {%- endif -%}
+  <!-- page_description -->
+
+  <!-- page_keywords -->
+  {%- if page_keywords.size > 0 -%}
+    {%- assign keywords = '' | append: page_keywords | strip -%}
+  {%- endif -%}
+  <!-- page_keywords -->
+
+  <!-- not homepage -->
+
+{%- endif -%}
+<!-- check if homepage -->
+
+<!-- keywords -->
+{%- unless keywords.size > 0 -%}
+
+  <!-- try to use categories and tags if no keywords provided in front matter -->
+  {%- if page.categories.size > 0 -%}
+    {%- assign categories = page.categories | join: ', ' -%}
+  {%- endif -%}
+
+  {%- if page.tags.size > 0 -%}
+    {%- assign tags = page.tags | join: ', ' -%}
+  {%- endif -%}
+
+  {%- assign keywords = '' -%}
+  {%- if categories.size > 0 -%}
+    {%- assign categories = page.categories | join: ', ' -%}
+    {%- assign keywords = keywords | append: categories -%}
+  {%- endif -%}
+  {%- if tags.size > 0 -%}
+    {%- assign tags = page.tags | join: ', ' -%}
+    {%- if categories.size > 0 -%}{%- assign keywords = keywords | append: ', ' -%}{%- endif -%}
+    {%- assign keywords = keywords | append: tags -%}
+  {%- endif -%}
+
+  {%- if keywords.size > 0 -%}
+    {%- assign keywords = keywords | split: ', ' | uniq | join: ', ' -%}
+  {%- endif -%}
+  <!-- try to use categories and tags if no keywords variable in front matter -->
+
+{%- endunless -%}
+<!-- keywords -->
+
+<!-- robots -->
+{%- if page_robots.size > 0 -%}
+  {%- assign robots = '' | append: page_robots | strip -%}
+{%- else -%}
+  {%- if site_robots.size > 0 -%}
+    {%- assign robots = '' | append: site_robots | strip -%}
+  {%- endif -%}
+{%- endif -%}
+{%- unless robots.size > 0 -%}
+  {%- assign robots = 'noindex, nofollow, noarchive, noodp, noydi, nosnippet' -%}
+{%- endunless -%}
+<!-- robots -->
+
+<!-- canonical -->
+{%- if page_canonical.size > 0 -%}
+  {%- assign canonical = {{page_canonical | absolute_url}} -%}
+{%- else -%}
+  {%- assign canonical = {{page.url | absolute_url}} -%}
+{%- endif -%}
+<!-- canonical -->
+
+<!-- initialise values -->
+
+<head>
+
+  <!-- content-type -->
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <!-- content-type -->
+
+  <!-- viewport -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- viewport -->
+
+  <!-- timestamp -->
+  <meta name="timestamp" content="{{site.time}}">
+  <!-- timestamp -->
+
+  <!-- robots meta tag -->
+  {%- if robots.size > 0 -%}
+    <meta name="robots" content="{{robots}}">
+  {%- endif -%}
+  <!-- robots meta tag -->
+
+  <!-- open graph tags -->
+  <meta property="og:title" content="{{site_title}}">
+  <meta property="og:description" content="{{site_description}}">
+  <meta property="og:url" content="{{site.url | absolute_url}}">
+  <meta property="og:image" content="{{'/assets/images/blog1_icon_200x200.png' | absolute_url}}">
+  <meta property="og:image:alt" content="{{site_title}}">
+  <meta property="og:locale" content="en_GB">
+  <meta property="og:type" content="website">
+  <!-- open graph tags -->
+
+  <!-- keywords meta tags-->
+  {%- if keywords.size > 0 -%}
+    <meta name="keywords" content="{{keywords}}">
+  {%- endif -%}
+  <!-- keywords meta tags-->
+
+  <!-- description meta tag -->
+  {%- if description.size > 0 -%}
+    <meta name="description" content="{{description}}">
+  {%- endif -%}
+  <!-- description meta tag -->
+
+  <!-- title tag -->
+  {%- if title.size > 0 -%}
+    <title>{{title}}</title>
+  {%- endif -%}
+  <!-- title tag -->
+
+  <!-- canonical link -->
+  {%- if canonical.size > 0 -%}
+    <link rel="canonical" href="{{canonical}}">
+  {%- endif -%}
+  <!-- canonical link -->
+
+  <!-- sitemap -->
+  <link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml">
+  <!-- sitemap -->
+
+  <!-- favicon.ico -->
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico">
+  <!-- favicon.ico -->
+
+  <!-- stylesheets -->
+  <link rel="stylesheet" href="/assets/main.css">
+  <link rel="stylesheet" href="/assets/css/style.css">
+  <!-- stylesheets -->
+
+  <!-- javascript -->
+  <script src="/assets/js/blog.js"></script>
+  <!-- javascript -->
+
+  <!-- JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph":
+    [
+      {%- if page.layout == 'home' -%}
+
+        {{BLANK}}
+        {
+          "@type": "Person",
+          "@id": "{{site.url | absolute_url}}/#person_tim_brockley",
+          "url": "{{site.url | absolute_url}}/",
+          "name": "Tim Brockley",
+          "image": "{{'/assets/images/tb1-crop1.jpg' | absolute_url}}"
+        },
+        {
+          "@type": "WebSite",
+          "@id": "{{site.url | absolute_url}}/#website",
+          "url": "{{site.url | absolute_url}}/",
+          {%- if site_title.size > 0 -%}
+            {{BLANK}}
+            "name": "{{site_title}}",
+          {%- endif -%}
+          {%- if site_description.size > 0 -%}
+            {{BLANK}}
+            "description": "{{site_description}}",
+          {%- endif -%}
+          {{BLANK}}
+          "creator": { "@id": "{{site.url | absolute_url}}/#person_tim_brockley" },
+          "copyrightHolder": { "@id": "{{site.url | absolute_url}}/#person_tim_brockley" },
+          "hasPart":
+          [
+            { "@id": "{{site.url | absolute_url}}/#webpage_index" }
+
+            {%- assign site_posts = site.posts | sort: 'url' -%}
+            {%- for post in site_posts -%}
+              {%- unless post.path contains '_drafts/' -%}
+                ,
+                { "@id": "{{site.url | absolute_url}}/#webpage{{post.url | replace: '/','_'}}" }
+              {%- endunless -%}
+            {%- endfor -%}
+            {{BLANK}}
+          ]
+        },
+        {
+          "@type": "WebPage",
+          "@id": "{{site.url | absolute_url}}/#webpage_index",
+          "url": "{{site.url | absolute_url}}/",
+          "name": "{{site_title}}"
+        }
+
+        {%- assign site_posts = site.posts | sort: 'url' -%}
+        {%- for post in site_posts -%}
+          {%- unless post.path contains '_drafts/' -%}
+            ,
+            {
+              "@type": "WebPage",
+              "@id": "{{site.url | absolute_url}}/#webpage{{post.url | replace: '/','_'}}",
+              "url": "{{post.url | absolute_url}}",
+              "name": "{{post.title}}"
+            }
+          {%- endunless -%}
+        {%- endfor -%}
+
+        {%- assign position = 0 -%}
+        ,{{BLANK}}
+        {
+          "@type": "BreadcrumbList",
+          "@id": "{{site.url | absolute_url}}/#breadcrumblist",
+          "name": "Website Breadcrumbs",
+          "itemListElement":
+          [
+            {%- assign position = position | plus: 1 -%}
+            {{BLANK}}
+            {
+              "@type": "ListItem",
+              "@id": "{{site.url | absolute_url}}/#breadcrumblist_listitem{{position}}",
+              "position": {{position}},
+              "item":
+              {
+                "@type": "WebPage",
+                "@id": "{{site.url | absolute_url}}/#webpage_home",
+                "url": "{{site.url | absolute_url}}/",
+                "name": "home"
+              }
+            }
+          ]
+        }
+
+      {%- else -%}
+
+        {%- assign position = 0 -%}
+        {{BLANK}}
+        {
+          "@type": "BreadcrumbList",
+          "@id": "{{site.url | absolute_url}}/#breadcrumblist",
+          "name": "Website Breadcrumbs",
+          "itemListElement":
+          [
+            {%-comment-%}
+            {%- assign position = position | plus: 1 -%}
+            {{BLANK}}
+            {
+              "@type": "ListItem",
+              "@id": "{{site.url | absolute_url}}/#breadcrumblist_listitem{{position}}",
+              "position": {{position}},
+              "item":
+              {
+                "@type": "WebPage",
+                "@id": "{{site.url | absolute_url}}/#webpage_home",
+                "url": "{{site.url | absolute_url}}/",
+                "name": "home"
+              }
+            }
+            {%-endcomment-%}
+
+            {%-comment-%}check if homepage{%-endcomment-%}
+            {%- unless page.layout == 'home' -%}
+              {%- if page.categories[0].size > 0 -%}
+                {%- assign breadcrumb_category = '' | append: page.categories[0] | strip | replace: ' ','%20'  -%}
+                {%- if position > 0 -%},{%- endif -%}
+                {%- assign position = position | plus: 1 -%}
+                {{BLANK}}
+                {
+                  "@type": "ListItem",
+                  "@id": "{{site.url | absolute_url}}/#breadcrumblist_listitem{{position}}",
+                  "position": {{position}},
+                  "item":
+                  {
+                    "@type": "WebPage",
+                    "@id": "{{site.url | absolute_url}}/#webpage_category_{{breadcrumb_category}}",
+                    "url": "{{site.url | absolute_url}}/categories#{{breadcrumb_category | replace: ' ','%20'}}",
+                    "name": "{{url_category}}"
+                  }
+                }
+              {%- endif -%}
+
+              {%- if position > 0 -%},{%- endif -%}
+              {%- assign position = position | plus: 1 -%}
+              {{BLANK}}
+              {
+                "@type": "ListItem",
+                "@id": "{{site.url | absolute_url}}/#breadcrumblist_listitem{{position}}",
+                "position": {{position}},
+                "item":
+                {
+                  "@type": "WebPage",
+                  "@id": "{{site.url | absolute_url}}/#webpage{{page.url | replace: '/','_'}}",
+                  "url": "{{page.url | absolute_url}}",
+                  "name": "{{url_title}}"
+                }
+
+              }
+            {%- endunless -%}
+            {%-comment-%}check if homepage{%-endcomment-%}
+            {{BLANK}}
+          ]
+        }
+
+      {%- endif -%}
+      {{BLANK}}
+    ]
+  }
+  </script>
+  <!-- JSON-LD -->
+
+</head>
+<!-- HEAD -->

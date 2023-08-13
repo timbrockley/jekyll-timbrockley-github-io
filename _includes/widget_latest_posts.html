@@ -1,0 +1,17 @@
+{%- if include.delimiter -%}
+  {%- assign delimiter = include.delimiter -%}
+{%- else -%}
+  headerbar{%- assign delimiter = '' -%}
+{%- endif -%}
+
+{%- if include.limit -%}
+  {%- assign limit = include.limit -%}
+{%- else -%}
+  {%- assign limit = 10 -%}
+{%- endif -%}
+
+{%- if site.posts.size > 0 -%}
+  {%- for post in site.posts limit:{{limit}} -%}
+    <a href="{{post.url}}">{{post.title | truncate: 36}}</a>{{delimiter}}
+  {%- endfor -%}
+{%- endif -%}

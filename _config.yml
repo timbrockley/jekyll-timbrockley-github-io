@@ -1,0 +1,24 @@
+title:  "Tim Brockley Blog"
+description: "Blog site containing various blog posts about subjects from linux and code development to maths and english."
+
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "https://blog.timbrockley.co.uk"
+
+permalink: /:categories/:title
+
+robots: "index, follow, noarchive, noodp, noydi"
+robots_allow: true
+
+copyright_year_start: 2001
+copyright_owner: Tim Brockley.
+copyright_terms: All Rights Reserved.
+
+collections_dir: pages
+
+defaults:
+  -
+    scope:
+      path: "" # an empty string here means all files in the project
+    values:
+      layout: "default"
+      author: Tim Brockley

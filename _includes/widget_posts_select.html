@@ -1,0 +1,7 @@
+<select id="option_posts" onchange="window.document.location.href=this.options[this.selectedIndex].value;">
+    <option value="">&nbsp;</option>
+    {%- assign site_posts = site.posts | sort: 'title' -%}
+    {%- for post in site_posts -%}
+        <option value="{{post.url}}">{{post.title | truncate: 36}}</option>
+    {%- endfor -%}
+</select>

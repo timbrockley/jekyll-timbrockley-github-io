@@ -1,0 +1,10 @@
+{%- if include.delimiter -%}
+  {%- assign delimiter = include.delimiter -%}
+{%- else -%}
+  {%- assign delimiter = '' -%}
+{%- endif -%}
+
+{%- assign site_categories = site.categories | sort -%}
+{%- for category in site_categories -%}
+    <a href="/categories#{{category | first | replace: ' ','%20'}}">{{category | first}}</a>{{delimiter}}
+{%- endfor -%}

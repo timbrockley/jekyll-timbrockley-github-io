@@ -1,0 +1,48 @@
+<!-- 301 LAYOUT -->
+<!DOCTYPE html>
+<html lang="en-GB">
+
+  <head>
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta http-equiv="refresh" content="0; URL={{page.redirect | absolute_url}}">
+
+    <meta name="timestamp" content="{{site.time}}">
+
+    <title>{{page.title}}</title>
+
+    <link rel="canonical" href="{{page.redirect | absolute_url}}">
+
+    <link rel="stylesheet" href="/assets/main.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
+
+  </head>
+
+  <body data-nosnippet>
+
+    {%- include header.html -%}
+
+
+    <div id="main">
+
+      <div class="centered_container">
+
+        <h2><span style="color: #FFF;background-color: #DF731B;padding-left:0.2em;padding-right:0.2em;padding-top:0.1em;padding-bottom:0.05em;">301</span> Redirect</h2>
+        <p>The requested page has moved permanantly.</p>
+        <p><a href="{{page.redirect | absolute_url}}">{{page.redirect | absolute_url}}</a></p>
+
+      </div>
+
+    </div>
+
+    {%- include sidebar.html -%}
+
+    {%- include footer.html -%}
+
+  </body>
+
+</html>
+<!-- 301 LAYOUT -->

@@ -1,0 +1,40 @@
+<!-- HEADER -->
+<div id="header" data-nosnippet>
+
+    <div id="headerbar">
+
+        <div id="menubar">
+
+            <a href="/">
+                <div class="menubar_home_link">
+                    <img src="/assets/images/home_white_200x200.png" alt="Home Icon">
+                    Home
+                </div>
+            </a>
+
+            <div class="dropdown_menu">
+                <a href="/categories"><div  class="dropdown_menu_title"><img src="/assets/images/categories_200x200.png" alt="Categories Icon">Categories</div></a>
+                <div class="dropdown_menu_item">
+                    {%- include widget_categories.html deilimeter='' %}
+                </div>
+            </div>
+
+            <div class="dropdown_menu">
+                <a href="/archive"><div  class="dropdown_menu_title"><img src="/assets/images/archive_245x200.png" alt="Archive Icon">Archive</div></a>
+                <div class="dropdown_menu_item">
+                    {%- include widget_archive.html deilimeter='' %}
+                </div>
+            </div>
+
+        </div>
+
+        <span id="header_site_title">
+            <a href="#" onclick="window.scrollTo(0,0); return false;"><img src="/assets/images/blog1_icon_white_200x200.png" style="width:20px;height:20px;margin-top:5px;margin-bottom:5px;margin-left:2px;margin-right:8px;float:left;" alt="Blog Icon"></a>
+            <a href="/">{{site.title}}</a>
+        </span>
+
+    </div>
+
+</div>
+
+<!-- HEADER -->

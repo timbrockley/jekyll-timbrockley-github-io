@@ -1,0 +1,10 @@
+{%- if include.delimiter -%}
+  {%- assign delimiter = include.delimiter -%}
+{%- else -%}
+  headerbar{%- assign delimiter = '' -%}
+{%- endif -%}
+
+{%- assign site_tags = site.tags | sort -%}
+{%- for tag in site_tags -%}
+    <a href="/tags#{{tag | first}}">{{tag | first}}</a>{{delimiter}}
+{%- endfor -%}

@@ -1,0 +1,29 @@
+---
+layout: none
+---
+{%- if page.robots_disallow == true or page.robots_disallow == false -%}
+    {%- assign robots_disallow = page.robots_disallow -%}
+{%- else -%}
+    {%- if site.robots_disallow == true or site.robots_disallow == false -%}
+        {%- assign robots_disallow = site.robots_disallow -%}
+    {%- endif -%}
+{%- endif -%}
+
+{%- if page.robots_allow == true or page.robots_allow == false -%}
+    {%- assign robots_allow = page.robots_allow -%}
+{%- else -%}
+    {%- if site.robots_allow == true or site.robots_allow == false -%}
+        {%- assign robots_allow = site.robots_allow -%}
+    {%- endif -%}
+{%- endif -%}
+
+{%- assign BLANK = '' -%}
+User-agent: *
+{{BLANK}}
+{%- if robots_disallow == false or robots_disallow != true and robots_allow == true -%}
+Allow: /
+{{BLANK}}
+Sitemap: {{'/sitemap.xml' | absolute_url}}
+{%- else -%}
+Disallow: /
+{%- endif -%}

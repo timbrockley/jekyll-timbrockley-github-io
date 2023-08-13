@@ -1,0 +1,51 @@
+---
+layout: default
+title: Tags
+robots: "index, follow, noarchive, noodp, noydi"
+description: "Posts grouped by tag."
+canonical: /
+permalink: /tags
+---
+<div id="content">
+
+  <h2>Tags</h2>
+
+  <div style="margin: 20px;">
+
+    <!-- display posts with no tags -->
+    <ul>
+    {%- assign site_posts = site.posts | sort: 'title' -%}
+    {%- for post in site_posts -%}
+        {%- if post.tags.size == 0 -%}
+          <li>
+            <a href="{{post.url}}">{{post.title}}</a>
+            &nbsp;
+            <span style="color:#555;font-size: smaller;">{{post.date | date: '%d %b %Y'}}&nbsp;</span>
+          </li>
+        {%- endif -%}
+    {%- endfor -%}
+    </ul>
+    <!-- display posts with no tags -->
+
+    <!-- display posts by tag -->
+    {%- assign site_tags = site.tags | sort -%}
+    {%- for tag in site_tags -%}
+      {%- capture tag_name -%}{{ tag | first }}{%- endcapture -%}
+      <a id="{{tag_name}}"></a>
+      <h3>{{tag_name}}</h3>
+      <ul>
+        {%- assign posts = site.tags[tag_name] | sort: 'title' -%}
+        {%- for post in posts -%}
+          <li>
+            <a href="{{post.url}}">{{post.title}}</a>
+            &nbsp;
+            <span style="color:#555;font-size: smaller;">{{post.date | date: '%d %b %Y'}}&nbsp;</span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- endfor -%}
+    <!-- display posts by tag -->
+
+  </div>
+
+</div>
