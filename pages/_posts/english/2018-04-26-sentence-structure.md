@@ -1,12 +1,12 @@
 ---
 layout: post
 title: "Sentence Structure"
-description: "English uses a Subject–Verb–Object Model (SOV)."
+description: "English uses a Subject-Verb-Object Model (SOV)."
 image: "/assets/images/english/book_green_200x200.png"
 categories: [english]
-tags: [sov, subject–verb–object]
+tags: [sov, subject-verb-object]
 ---
-English uses a Subject–Verb–Object Model (SOV).
+English uses a Subject-Verb-Object Model (SOV).
 
 For example:
 
