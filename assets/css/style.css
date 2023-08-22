@@ -46,7 +46,7 @@ body
     padding: 0px 4px 0px 0px;
 }
 
-@media only screen and (max-width: 768px) 
+@media only screen and (max-width: 768px)
 {
     #header_site_title { display: none; }
 }
@@ -358,3 +358,13 @@ a:hover { color: blue; }
 a { scroll-margin-top: 2em; }
 
 .hidden { display: none; }
+
+#human_test_text
+{
+    margin: 0px;
+    padding: 4px;
+    padding-left: 6px;
+    padding-right: 6px;
+    font-weight: bold;
+    outline: thin solid #007fff;
+}
