@@ -356,3 +356,5 @@ a:visited { color: #4963AF; }
 a:hover { color: blue; }
 
 a { scroll-margin-top: 2em; }
+
+.hidden { display: none; }

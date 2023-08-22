@@ -1,6 +1,9 @@
 _drafts
 _site
 
+assets/js/contact-netlify.js
+pages/contact.html
+
 .jekyll-cache
 .jekyll-metadata
 .sass-cache
