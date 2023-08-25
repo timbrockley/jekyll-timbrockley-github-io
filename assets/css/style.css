@@ -357,8 +357,6 @@ a:hover { color: blue; }
 
 a { scroll-margin-top: 2em; }
 
-.hidden { display: none; }
-
 #human_test_text
 {
     margin: 0px;
@@ -368,3 +366,10 @@ a { scroll-margin-top: 2em; }
     font-weight: bold;
     outline: thin solid #007fff;
 }
+
+.hidden { display: none; }
+
+.green_larger { color:green; font-size: larger; }
+.red_larger { color:red; font-size: larger; }
+
+#contact_form_email { color: black; }
